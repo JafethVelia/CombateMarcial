@@ -10,73 +10,64 @@ namespace CombateMarcial
             {
                 new ArteMarcial("Karate", new List<Golpe>
                 {
-                    new Golpe("Gyaku Zuki", 20),
-                    new Golpe("Mae Geri", 25),
-                    new Golpe("Ushiro Geri", 30)
+                    new Golpe("Puño recto", 20),
+                    new Golpe("Patada circular", 25, true),        // cura
+                    new Golpe("Golpe descendente", 30, false, 10)  // daño extra
                 }),
-
                 new ArteMarcial("Taekwondo", new List<Golpe>
                 {
-                    new Golpe("Dollyo Chagi", 22),
-                    new Golpe("Ap Chagi", 24),
-                    new Golpe("Bandal Chagi", 28)
+                    new Golpe("Patada frontal", 22),
+                    new Golpe("Patada giratoria", 28, false, 12),
+                    new Golpe("Golpe de talón", 26, true)
                 }),
-
-                new ArteMarcial("Kung Fu", new List<Golpe>
-                {
-                    new Golpe("Puño de Tigre", 26),
-                    new Golpe("Patada de Grulla", 24),
-                    new Golpe("Golpe de Palma", 20)
-                }),
-
                 new ArteMarcial("Muay Thai", new List<Golpe>
                 {
-                    new Golpe("Codo Ascendente", 30),
-                    new Golpe("Rodillazo Volador", 35),
-                    new Golpe("Low Kick", 25)
+                    new Golpe("Codo cruzado", 30),
+                    new Golpe("Rodillazo", 35, false, 10),
+                    new Golpe("Patada baja", 20, true)
                 }),
-
-                new ArteMarcial("Jiu Jitsu", new List<Golpe>
+                new ArteMarcial("Kung Fu", new List<Golpe>
                 {
-                    new Golpe("Llave de brazo", 28),
-                    new Golpe("Rear Naked Choke", 32),
-                    new Golpe("Guillotina", 26)
+                    new Golpe("Palm strike", 25),
+                    new Golpe("Golpe de grulla", 30, false, 8),
+                    new Golpe("Patada del tigre", 27, true)
                 }),
-
                 new ArteMarcial("Boxeo", new List<Golpe>
                 {
                     new Golpe("Jab", 18),
-                    new Golpe("Cross", 22),
-                    new Golpe("Uppercut", 26)
+                    new Golpe("Uppercut", 30, false, 10),
+                    new Golpe("Gancho", 24, true)
                 }),
-
+                new ArteMarcial("Jiu Jitsu", new List<Golpe>
+                {
+                    new Golpe("Palanca de brazo", 30),
+                    new Golpe("Luxación", 28, false, 12),
+                    new Golpe("Estrangulación", 32, true)
+                }),
                 new ArteMarcial("Capoeira", new List<Golpe>
                 {
-                    new Golpe("Meia Lua", 23),
-                    new Golpe("Armada", 27),
-                    new Golpe("Martelo", 25)
+                    new Golpe("Meia Lua", 24),
+                    new Golpe("Rabo de Arraia", 29, true),
+                    new Golpe("Armada", 25, false, 10)
                 }),
-
                 new ArteMarcial("Krav Maga", new List<Golpe>
                 {
-                    new Golpe("Golpe al cuello", 30),
-                    new Golpe("Patada a la ingle", 28),
-                    new Golpe("Puño directo", 22)
+                    new Golpe("Rodillazo al torso", 30),
+                    new Golpe("Golpe ocular", 25, false, 15),
+                    new Golpe("Codazo", 28, true)
                 }),
-
-                new ArteMarcial("Sambo", new List<Golpe>
+                new ArteMarcial("Savate", new List<Golpe>
                 {
-                    new Golpe("Proyección de cadera", 27),
-                    new Golpe("Tackle doble pierna", 29),
-                    new Golpe("Llave de tobillo", 25)
+                    new Golpe("Chassé", 23),
+                    new Golpe("Fouetté", 26, true),
+                    new Golpe("Revers", 27, false, 9)
                 }),
-
-                new ArteMarcial("Jeet Kune Do", new List<Golpe>
+                new ArteMarcial("Kickboxing", new List<Golpe>
                 {
-                    new Golpe("Intercepting Fist", 28),
-                    new Golpe("Backfist", 26),
-                    new Golpe("Side Kick", 30)
-                })
+                    new Golpe("Low kick", 24),
+                    new Golpe("High kick", 30, false, 10),
+                    new Golpe("Hook", 25, true)
+                }),
             };
         }
     }

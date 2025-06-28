@@ -1,17 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CombateMarcial
 {
     public class Jugador
     {
         public string Nombre { get; set; }
-        public int Vida { get; private set; }
+        public int Vida { get; set; } = 200;
         public List<ArteMarcial> ArtesMarciales { get; private set; }
+
+        private Random random = new Random();
 
         public Jugador(string nombre)
         {
             Nombre = nombre;
-            Vida = 200;
             ArtesMarciales = new List<ArteMarcial>();
         }
 
@@ -20,42 +23,56 @@ namespace CombateMarcial
             ArtesMarciales = nuevas;
         }
 
-        public void Reiniciar()
+        public List<Golpe> GenerarCombo(bool manual, ArteMarcial arteManual = null)
         {
-            Vida = 200;
-        }
+            int cantidad = random.Next(3, 7); // 3 a 6 golpes
 
-        public List<Golpe> GenerarCombo(bool usuario, ArteMarcial arte = null)
-        {
-            var random = new Random();
-            var combo = new List<Golpe>();
-            var origen = arte != null ? arte.Golpes : TodasLosGolpes();
-
-            int cantidad = random.Next(3, 7); // de 3 a 6 golpes
-            for (int i = 0; i < cantidad; i++)
+            if (manual)
             {
-                combo.Add(origen[random.Next(origen.Count)]);
+                return Enumerable.Range(0, cantidad)
+                    .Select(_ => arteManual.Golpes[random.Next(arteManual.Golpes.Count)])
+                    .ToList();
             }
-            return combo;
+            else
+            {
+                return Enumerable.Range(0, cantidad)
+                    .Select(_ =>
+                    {
+                        var arte = ArtesMarciales[random.Next(ArtesMarciales.Count)];
+                        return arte.Golpes[random.Next(arte.Golpes.Count)];
+                    })
+                    .ToList();
+            }
         }
 
         public void AplicarCombo(List<Golpe> combo, Jugador oponente, Bitacora bitacora)
         {
             foreach (var golpe in combo)
             {
-                oponente.Vida -= golpe.Danio;
-                bitacora.Agregar($"{Nombre} usó {golpe.Nombre} causando {golpe.Danio} de daño");
+                int totalDano = golpe.Poder + golpe.DanoExtra;
+                oponente.Vida -= totalDano;
+
+                string log = $"{Nombre} usó {golpe.Nombre} y causó {totalDano} de daño";
+
+                if (golpe.Cura)
+                {
+                    int cantidadCurada = golpe.Poder / 2;
+                    this.Vida = Math.Min(200, this.Vida + cantidadCurada);
+                    log += $" (curó {cantidadCurada})";
+                }
+
+                if (golpe.DanoExtra > 0)
+                {
+                    log += $" (daño extra: {golpe.DanoExtra})";
+                }
+
+                bitacora.Agregar(log);
             }
         }
 
-        private List<Golpe> TodasLosGolpes()
+        public void Reiniciar()
         {
-            var lista = new List<Golpe>();
-            foreach (var arte in ArtesMarciales)
-            {
-                lista.AddRange(arte.Golpes);
-            }
-            return lista;
+            Vida = 200;
         }
     }
 }
