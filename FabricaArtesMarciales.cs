@@ -12,12 +12,12 @@ namespace CombateMarcial
                 {
                     new Golpe("Puño recto", 20),
                     new Golpe("Patada circular", 25, true),        // cura
-                    new Golpe("Golpe descendente", 30, false, 10)  // daño extra
+                    new Golpe("Golpe descendente", 30, false, 5)  // daño extra
                 }),
                 new ArteMarcial("Taekwondo", new List<Golpe>
                 {
                     new Golpe("Patada frontal", 22),
-                    new Golpe("Patada giratoria", 28, false, 12),
+                    new Golpe("Patada giratoria", 28, false, 30),
                     new Golpe("Golpe de talón", 26, true)
                 }),
                 new ArteMarcial("Muay Thai", new List<Golpe>
@@ -48,24 +48,24 @@ namespace CombateMarcial
                 {
                     new Golpe("Meia Lua", 24),
                     new Golpe("Rabo de Arraia", 29, true),
-                    new Golpe("Armada", 25, false, 10)
+                    new Golpe("Armada", 15, false, 10)
                 }),
                 new ArteMarcial("Krav Maga", new List<Golpe>
                 {
-                    new Golpe("Rodillazo al torso", 30),
-                    new Golpe("Golpe ocular", 25, false, 15),
+                    new Golpe("Rodillazo al torso", 50),
+                    new Golpe("Golpe ocular", 25, false, 20),
                     new Golpe("Codazo", 28, true)
                 }),
                 new ArteMarcial("Savate", new List<Golpe>
                 {
                     new Golpe("Chassé", 23),
-                    new Golpe("Fouetté", 26, true),
+                    new Golpe("Fouetté", 18, true),
                     new Golpe("Revers", 27, false, 9)
                 }),
                 new ArteMarcial("Kickboxing", new List<Golpe>
                 {
-                    new Golpe("Low kick", 24),
-                    new Golpe("High kick", 30, false, 10),
+                    new Golpe("Low kick", 30),
+                    new Golpe("High kick", 30, false, 20),
                     new Golpe("Hook", 25, true)
                 }),
             };
