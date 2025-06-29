@@ -34,9 +34,11 @@ namespace CombateMarcial
             VidaP1.Text = $"{jugador1.Vida} de 200";
             VidaP2.Text = $"{jugador2.Vida} de 200";
             ComboArtesP1.ItemsSource = jugador1.ArtesMarciales.Select(a => a.Nombre);
-            ListaGolpesP1.ItemsSource = null;
-            ListaGolpesP2.ItemsSource = null;
+            // Quitar estas dos líneas para que no se borren los combos aquí
+            // ListaGolpesP1.ItemsSource = null;
+            // ListaGolpesP2.ItemsSource = null;
         }
+
 
         private void BtnReasignarP1_Click(object sender, RoutedEventArgs e)
         {
@@ -118,6 +120,11 @@ namespace CombateMarcial
                     ListaGolpesP1.ItemsSource = arte.Golpes.Select(g => g.Nombre);
                 }
             }
+        }
+
+        private void ListaGolpesP1_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
