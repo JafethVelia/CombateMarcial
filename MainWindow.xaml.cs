@@ -58,38 +58,50 @@ namespace CombateMarcial
                 return;
             }
 
+            // Arte seleccionada por jugador 1
             string seleccion = ComboArtesP1.SelectedItem.ToString();
-            ArteMarcial arte = jugador1.ArtesMarciales.First(a => a.Nombre == seleccion);
+            ArteMarcial arte1 = jugador1.ArtesMarciales.First(a => a.Nombre == seleccion);
+            var combo1 = jugador1.GenerarCombo(true, arte1);
 
-            var combo1 = jugador1.GenerarCombo(true, arte);
-            var arteP2 = jugador2.ArtesMarciales[new Random().Next(jugador2.ArtesMarciales.Count)];
-            TextoArteP2.Text = arteP2.Nombre;
-            var combo2 = jugador2.GenerarCombo(true, arteP2);  // mismo método que el P1
+            // Arte aleatoria para jugador 2
+            Random rnd = new Random();
+            ArteMarcial arte2 = jugador2.ArtesMarciales[rnd.Next(jugador2.ArtesMarciales.Count)];
 
+            // Mostrar arte marcial usada por jugador 2 y sus golpes en el cuadro blanco
+            TextoArteUsadoP2.Text = arte2.Nombre + "\n" + string.Join("\n", arte2.Golpes.Select(g => "- " + g.Nombre));
 
-            ListaGolpesP1.ItemsSource = combo1.Select(g => g.Nombre);
-            ListaGolpesP2.ItemsSource = combo2.Select(g => g.Nombre);
+            // Generar combo para jugador 2 con esa arte
+            var combo2 = jugador2.GenerarCombo(false, arte2);
 
+            // Mostrar combos en los ListBox
+            ListaGolpesP1.ItemsSource = combo1.Select(g => g.Nombre).ToList();
+            ListaGolpesP2.ItemsSource = combo2.Select(g => g.Nombre).ToList();
+
+            // Aplicar combos y registrar en la bitácora
             jugador1.AplicarCombo(combo1, jugador2, Bitacora.Instancia);
             jugador2.AplicarCombo(combo2, jugador1, Bitacora.Instancia);
 
+            // Actualizar bitácora en la interfaz
             BitacoraLista.ItemsSource = null;
             BitacoraLista.ItemsSource = Bitacora.Instancia.Registro;
 
+            // Refrescar vida y combos
             Refrescar();
 
+            // Comprobar si alguien ganó
             if (jugador1.Vida <= 0 || jugador2.Vida <= 0)
             {
                 string ganador = jugador1.Vida > jugador2.Vida ? "Player 1" : "Player 2";
-                MessageBox.Show($"Ganó {ganador}!");
+                MessageBox.Show($"¡Ganó {ganador}!");
                 jugador1.Reiniciar();
                 jugador2.Reiniciar();
-                // Bitacora.Instancia.Reiniciar();  // Lo comentamos para no borrar la bitácora
+                // NO borramos la bitácora para que quede el historial
                 AsignarArtes(jugador1);
                 AsignarArtes(jugador2);
                 Refrescar();
             }
         }
+
 
         private void BtnAtacar_Click(object sender, RoutedEventArgs e)
         {
